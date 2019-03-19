@@ -1,0 +1,7 @@
+models/
+*.jpg
+*.png
+.terraform*
+*.tfvars
+*.tfstate
+*.pem
