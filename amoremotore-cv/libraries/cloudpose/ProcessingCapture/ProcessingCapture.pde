@@ -1,12 +1,12 @@
 import processing.net.*;
 import processing.video.*;
-import mqtt.*;
+import processing.serial.*;
+
+Serial amoremotoreMod01Port;
 
 Capture video;
 
 Client client; 
-
-MQTTClient mqttClient;
 
 Person[] people;
 
@@ -15,9 +15,9 @@ long time;
 long delay;
 
 void setup() {
-  mqttClient = new MQTTClient(this);
-  mqttClient.connect("mqtt://try:try@broker.shiftr.io", "amoremotore-cv");
+  println(Serial.list());
   size(320, 200);
+  amoremotoreMod01Port new Serial(this, "/dev/cu.usbmodem141001", 9600);
 
   //println(Capture.list());
   
@@ -59,35 +59,43 @@ void draw() {
       person.draw();
       if ((person.points[Person.MidHip].x <= (width/8)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT1");
-        mqttClient.publish("/amoremotore01", "MOT1");
+				myPort.write(str(MOT1));
+				myPort.write("\n");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 2)) && (person.points[Person.MidHip].x >= (width / 8)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT2");
-        mqttClient.publish("/amoremotore01", "MOT2");
+				myPort.write(str(MOT2));
+				myPort.write("\n");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 3)) && (person.points[Person.MidHip].x >= (width / 8 * 2)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT3");
-        mqttClient.publish("/amoremotore01", "MOT3");
+				myPort.write(str(MOT3));
+				myPort.write("\n");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 4)) && (person.points[Person.MidHip].x >= (width / 8 * 3)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT4");
-        mqttClient.publish("/amoremotore01", "MOT4");
+				myPort.write(str(MOT4));
+				myPort.write("\n");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 5)) && (person.points[Person.MidHip].x >= (width / 8 * 4)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT5");
-        mqttClient.publish("/amoremotore01", "MOT5");
+				myPort.write(str(MOT5));
+				myPort.write("\n");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 6)) && (person.points[Person.MidHip].x >= (width / 8 * 5)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT6");
-        mqttClient.publish("/amoremotore01", "MOT6");
+				myPort.write(str(MOT6));
+				myPort.write("\n");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 7)) && (person.points[Person.MidHip].x >= (width / 8 * 6)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT7");
-        mqttClient.publish("/amoremotore01", "MOT7");
+				myPort.write(str(MOT7));
+				myPort.write("\n");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 8)) && (person.points[Person.MidHip].x >= (width / 8 * 7)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT8");
-        mqttClient.publish("/amoremotore01", "MOT8");
+				myPort.write(str(MOT8));
+				myPort.write("\n");
       }
     }
   }
