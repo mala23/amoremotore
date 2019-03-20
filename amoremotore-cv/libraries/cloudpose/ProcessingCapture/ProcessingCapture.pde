@@ -17,7 +17,7 @@ long delay;
 void setup() {
   println(Serial.list());
   size(320, 200);
-  amoremotoreMod01Port new Serial(this, "/dev/cu.usbmodem141001", 9600);
+  amoremotoreMod01Port = new Serial(this, "/dev/cu.usbmodem14101", 9600);
 
   //println(Capture.list());
   
@@ -59,43 +59,43 @@ void draw() {
       person.draw();
       if ((person.points[Person.MidHip].x <= (width/8)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT1");
-				myPort.write(str(MOT1));
-				myPort.write("\n");
+				amoremotoreMod01Port.write("MOT1");
+				amoremotoreMod01Port.write("\n");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 2)) && (person.points[Person.MidHip].x >= (width / 8)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT2");
-				myPort.write(str(MOT2));
-				myPort.write("\n");
+				amoremotoreMod01Port.write("MOT2");
+				amoremotoreMod01Port.write("\n");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 3)) && (person.points[Person.MidHip].x >= (width / 8 * 2)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT3");
-				myPort.write(str(MOT3));
-				myPort.write("\n");
+				amoremotoreMod01Port.write("MOT3");
+				amoremotoreMod01Port.write("\n");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 4)) && (person.points[Person.MidHip].x >= (width / 8 * 3)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT4");
-				myPort.write(str(MOT4));
-				myPort.write("\n");
+				amoremotoreMod01Port.write("MOT4");
+				amoremotoreMod01Port.write("\n");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 5)) && (person.points[Person.MidHip].x >= (width / 8 * 4)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT5");
-				myPort.write(str(MOT5));
-				myPort.write("\n");
+				amoremotoreMod01Port.write("MOT5");
+				amoremotoreMod01Port.write("\n");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 6)) && (person.points[Person.MidHip].x >= (width / 8 * 5)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT6");
-				myPort.write(str(MOT6));
-				myPort.write("\n");
+				amoremotoreMod01Port.write("MOT6");
+				amoremotoreMod01Port.write("\n");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 7)) && (person.points[Person.MidHip].x >= (width / 8 * 6)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT7");
-				myPort.write(str(MOT7));
-				myPort.write("\n");
+				amoremotoreMod01Port.write("MOT7");
+				amoremotoreMod01Port.write("\n");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 8)) && (person.points[Person.MidHip].x >= (width / 8 * 7)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT8");
-				myPort.write(str(MOT8));
-				myPort.write("\n");
+				amoremotoreMod01Port.write("MOT8");
+				amoremotoreMod01Port.write("\n");
       }
     }
   }
