@@ -12,8 +12,11 @@ long time;
 long delay;
 
 void setup() {
-  size(640, 480);
+  size(320, 200);
+
+  //println(Capture.list());
   
+  //video = new Capture(this, width, height, "HD Pro Webcam C920", 15);
   video = new Capture(this, width, height, 15);
   video.start();
   
@@ -35,7 +38,7 @@ void draw() {
     people = decodeJSON(decodeString(client.readBytes(length)));
     
     // log
-    println("received " + (8 + length));
+    //println("received " + (8 + length));
     
     // set flag
     sent = false;
@@ -49,6 +52,30 @@ void draw() {
   if (people != null) {
     for (Person person : people) {
       person.draw();
+      if ((person.points[Person.MidHip].x <= (width/8)) && (person.points[Person.MidHip].x != 0)) {
+        println("MOT1");
+      }
+      if ((person.points[Person.MidHip].x <= (width / 8 * 2)) && (person.points[Person.MidHip].x >= (width / 8)) && (person.points[Person.MidHip].x != 0)) {
+        println("MOT2");
+      }
+      if ((person.points[Person.MidHip].x <= (width / 8 * 3)) && (person.points[Person.MidHip].x >= (width / 8 * 2)) && (person.points[Person.MidHip].x != 0)) {
+        println("MOT3");
+      }
+      if ((person.points[Person.MidHip].x <= (width / 8 * 4)) && (person.points[Person.MidHip].x >= (width / 8 * 3)) && (person.points[Person.MidHip].x != 0)) {
+        println("MOT4");
+      }
+      if ((person.points[Person.MidHip].x <= (width / 8 * 5)) && (person.points[Person.MidHip].x >= (width / 8 * 4)) && (person.points[Person.MidHip].x != 0)) {
+        println("MOT5");
+      }
+      if ((person.points[Person.MidHip].x <= (width / 8 * 6)) && (person.points[Person.MidHip].x >= (width / 8 * 5)) && (person.points[Person.MidHip].x != 0)) {
+        println("MOT6");
+      }
+      if ((person.points[Person.MidHip].x <= (width / 8 * 7)) && (person.points[Person.MidHip].x >= (width / 8 * 6)) && (person.points[Person.MidHip].x != 0)) {
+        println("MOT7");
+      }
+      if ((person.points[Person.MidHip].x <= (width / 8 * 8)) && (person.points[Person.MidHip].x >= (width / 8 * 7)) && (person.points[Person.MidHip].x != 0)) {
+        println("MOT8");
+      }
     }
   }
   
@@ -67,7 +94,7 @@ void draw() {
     client.write(encoded);
     
     // log
-    println("sent " + (8 + encoded.length));
+    //println("sent " + (8 + encoded.length));
     
     // set flag
     sent = true;
