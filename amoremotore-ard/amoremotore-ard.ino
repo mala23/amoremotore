@@ -12,7 +12,9 @@ uint16_t motors = 0;
 
 void setup() {
   Serial.begin(9600);
-
+  motors = 0b0101010101010101;
+  updateShiftRegister();
+    
   // Set all the pins of 74HC595 as OUTPUT
   pinMode(latchPin, OUTPUT);
   pinMode(dataPin, OUTPUT);
@@ -24,19 +26,18 @@ void loop() {
   if (Serial.available() > 0)
   {
     // read string
-    String str = Serial.readStringUntil('\n');
-    Serial.print(str);
-
-    motors = 0b1010101010101010;
-    updateShiftRegister(str);
+    motors = Serial.read();
+    Serial.print(motors);
+    Serial.println();
+    updateShiftRegister();
   }
 }
 
-void updateShiftRegister(bytes)
+void updateShiftRegister()
 {
   digitalWrite(latchPin, LOW);
   //digitalWrite(clockPin, LOW);
   shiftOut(dataPin, clockPin, LSBFIRST, motors);
-  shiftOut(dataPin, clockPin, LSBFIRST, (bytes);
+  shiftOut(dataPin, clockPin, LSBFIRST, (motors >> 8));
   digitalWrite(latchPin, HIGH);
 }

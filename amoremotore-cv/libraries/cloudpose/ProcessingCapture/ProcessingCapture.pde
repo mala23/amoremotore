@@ -14,10 +14,15 @@ boolean sent = false;
 long time;
 long delay;
 
+String[] bytes = {"0b", "00", "00", "00", "00", "00", "00", "00", "00"};
+long bytesTime;
+String bytesStr;
+
 void setup() {
-  println(Serial.list());
+  //println(Serial.list());
   size(320, 200);
   amoremotoreMod01Port = new Serial(this, "/dev/cu.usbmodem14101", 9600);
+  println("serial connected");
 
   //println(Capture.list());
   
@@ -29,6 +34,13 @@ void setup() {
 }
 
 void draw() {
+  // set the bytes every second
+  if (millis() > (bytesTime + 1000)) {
+    bytesStr = join(bytes, "");
+    setBytes(bytesStr);
+    bytesTime = millis();
+  }
+
   // read video frame if available
   if (video.available()) {
     video.read();
@@ -58,44 +70,52 @@ void draw() {
     for (Person person : people) {
       person.draw();
       if ((person.points[Person.MidHip].x <= (width/8)) && (person.points[Person.MidHip].x != 0)) {
-        println("MOT1");
-				amoremotoreMod01Port.write("MOT1");
-				amoremotoreMod01Port.write("\n");
+        //println("MOT1");
+        bytes[1] = "01";
+      } else {
+        bytes[1] = "00";
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 2)) && (person.points[Person.MidHip].x >= (width / 8)) && (person.points[Person.MidHip].x != 0)) {
-        println("MOT2");
-				amoremotoreMod01Port.write("MOT2");
-				amoremotoreMod01Port.write("\n");
+        //println("MOT2");
+        bytes[2] = "01";
+      } else {
+        bytes[2] = "00";
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 3)) && (person.points[Person.MidHip].x >= (width / 8 * 2)) && (person.points[Person.MidHip].x != 0)) {
-        println("MOT3");
-				amoremotoreMod01Port.write("MOT3");
-				amoremotoreMod01Port.write("\n");
+        //println("MOT3");
+        bytes[3] = "01";
+      } else {
+        bytes[3] = "00";
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 4)) && (person.points[Person.MidHip].x >= (width / 8 * 3)) && (person.points[Person.MidHip].x != 0)) {
-        println("MOT4");
-				amoremotoreMod01Port.write("MOT4");
-				amoremotoreMod01Port.write("\n");
+        //println("MOT4");
+        bytes[4] = "01";
+      } else {
+        bytes[4] = "00";
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 5)) && (person.points[Person.MidHip].x >= (width / 8 * 4)) && (person.points[Person.MidHip].x != 0)) {
-        println("MOT5");
-				amoremotoreMod01Port.write("MOT5");
-				amoremotoreMod01Port.write("\n");
+        //println("MOT5");
+        bytes[5] = "01";
+      } else {
+        bytes[5] = "00";
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 6)) && (person.points[Person.MidHip].x >= (width / 8 * 5)) && (person.points[Person.MidHip].x != 0)) {
-        println("MOT6");
-				amoremotoreMod01Port.write("MOT6");
-				amoremotoreMod01Port.write("\n");
+        //println("MOT6");
+        bytes[6] = "01";
+      } else {
+        bytes[6] = "00";
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 7)) && (person.points[Person.MidHip].x >= (width / 8 * 6)) && (person.points[Person.MidHip].x != 0)) {
-        println("MOT7");
-				amoremotoreMod01Port.write("MOT7");
-				amoremotoreMod01Port.write("\n");
+        //println("MOT7");
+        bytes[7] = "01";
+      } else {
+        bytes[7] = "00";
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 8)) && (person.points[Person.MidHip].x >= (width / 8 * 7)) && (person.points[Person.MidHip].x != 0)) {
-        println("MOT8");
-				amoremotoreMod01Port.write("MOT8");
-				amoremotoreMod01Port.write("\n");
+        //println("MOT8");
+        bytes[8] = "01";
+      } else {
+        bytes[8] = "00";
       }
     }
   }
@@ -123,6 +143,8 @@ void draw() {
   }
 }
 
-void messageReceived(String topic, byte[] payload) {
-  println("new message: " + topic + " - " + new String(payload));
+void setBytes(String bytes) {
+  //println(bytes);
+  amoremotoreMod01Port.write(bytes);
+  amoremotoreMod01Port.write("\n");
 }
