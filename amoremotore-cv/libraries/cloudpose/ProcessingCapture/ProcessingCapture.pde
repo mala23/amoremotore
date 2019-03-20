@@ -16,7 +16,7 @@ long delay;
 
 void setup() {
   mqttClient = new MQTTClient(this);
-  mqttClient.connect("mqtt://try:try@broker.shiftr.io", "amoremotore");
+  mqttClient.connect("mqtt://try:try@broker.shiftr.io", "amoremotore-cv");
   size(320, 200);
 
   //println(Capture.list());
@@ -59,35 +59,35 @@ void draw() {
       person.draw();
       if ((person.points[Person.MidHip].x <= (width/8)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT1");
-        mqttClient.publish("/amoremotore", "MOT1");
+        mqttClient.publish("/amoremotore01", "MOT1");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 2)) && (person.points[Person.MidHip].x >= (width / 8)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT2");
-        mqttClient.publish("/amoremotore", "MOT2");
+        mqttClient.publish("/amoremotore01", "MOT2");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 3)) && (person.points[Person.MidHip].x >= (width / 8 * 2)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT3");
-        mqttClient.publish("/amoremotore", "MOT3");
+        mqttClient.publish("/amoremotore01", "MOT3");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 4)) && (person.points[Person.MidHip].x >= (width / 8 * 3)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT4");
-        mqttClient.publish("/amoremotore", "MOT4");
+        mqttClient.publish("/amoremotore01", "MOT4");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 5)) && (person.points[Person.MidHip].x >= (width / 8 * 4)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT5");
-        mqttClient.publish("/amoremotore", "MOT5");
+        mqttClient.publish("/amoremotore01", "MOT5");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 6)) && (person.points[Person.MidHip].x >= (width / 8 * 5)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT6");
-        mqttClient.publish("/amoremotore", "MOT6");
+        mqttClient.publish("/amoremotore01", "MOT6");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 7)) && (person.points[Person.MidHip].x >= (width / 8 * 6)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT7");
-        mqttClient.publish("/amoremotore", "MOT7");
+        mqttClient.publish("/amoremotore01", "MOT7");
       }
       if ((person.points[Person.MidHip].x <= (width / 8 * 8)) && (person.points[Person.MidHip].x >= (width / 8 * 7)) && (person.points[Person.MidHip].x != 0)) {
         println("MOT8");
-        mqttClient.publish("/amoremotore", "MOT8");
+        mqttClient.publish("/amoremotore01", "MOT8");
       }
     }
   }
