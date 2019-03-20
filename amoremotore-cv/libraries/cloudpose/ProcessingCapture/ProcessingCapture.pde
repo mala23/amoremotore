@@ -148,3 +148,9 @@ void setBytes(String bytes) {
   amoremotoreMod01Port.write(bytes);
   amoremotoreMod01Port.write("\n");
 }
+
+void serialEvent(Serial p) {
+  // get message till line break (ASCII > 13)
+  int message = amoremotoreMod01Port.read();
+  println(message);
+}
