@@ -1,0 +1,61 @@
+import processing.video.*;
+import gab.opencv.*;
+
+Capture cam;
+OpenCV opencv;
+
+int width = 640;
+int height = 480;
+
+void setup() {
+  size(640, 480);
+
+  cam = new Capture(this, width, height, 30);
+  opencv = new OpenCV(this, width, height);
+
+  opencv.startBackgroundSubtraction(5, 3, 0.5);
+
+  cam.start();     
+}
+
+void draw() {
+  if (cam.available() == true) {
+    cam.read();
+  }
+  image(cam, 0, 0);
+  opencv.loadImage(cam);
+
+  opencv.updateBackground();
+
+  opencv.dilate();
+  opencv.erode();
+
+  noFill();
+  stroke(255, 0, 0);
+  strokeWeight(3);
+  for (Contour contour : opencv.findContours()) {
+    contour.draw();
+    Rectangle box = contour.getBoundingBox();
+    //checkSection(contour.area());
+  }
+}
+
+void checkSection(float area) {
+  if (area <= (width / 8)) {
+    println("1");
+  } else if (area <= (width / 7) && area >= (width / 8)) {
+    println("2");
+  } else if (area <= (width / 6) && area >= (width / 7)) {
+    println("3");
+  } else if (area <= (width / 5) && area >= (width / 6)) {
+    println("4");
+  } else if (area <= (width / 4) && area >= (width / 5)) {
+    println("5");
+  } else if (area <= (width / 3) && area >= (width / 4)) {
+    println("6");
+  } else if (area <= (width / 2) && area >= (width / 3)) {
+    println("7");
+  } else if (area <= width && area >= (width / 2)) {
+    println("8");
+  }
+}
